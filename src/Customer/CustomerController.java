@@ -1,7 +1,10 @@
 package Customer;
 
+import Product.ProductController;
+
 import java.sql.SQLException;
 import java.util.Scanner;
+
 
 /**
  * Controller-klass för kundhantering
@@ -36,7 +39,8 @@ public class CustomerController {
                 System.out.println("\n=== Kundhantering ===");
                 System.out.println("1. Visa alla kunder");
                 System.out.println("2, Skapa ny kund");
-                System.out.println("3. Uppdatera kund");
+                System.out.println("3. Uppdatera konto");
+                System.out.println("4. Varor");
                 System.out.println("0. Avsluta");
                 System.out.print("Välj ett alternativ: ");
 
@@ -66,7 +70,7 @@ public class CustomerController {
                         System.out.println("added " + customer);
                         break;
                     case 3:
-                        System.out.println("\n=== Uppdatera kund ===");
+                        System.out.println("\n=== Uppdatera konto ===");
                         System.out.println("1. Uppdatera namn");
                         System.out.println("2. Uppdatera email");
                         System.out.println("3. Uppdatera telefon");
@@ -111,7 +115,11 @@ public class CustomerController {
                             break;
                         default:
                             System.out.println("Ogiltigt val, försök igen");
+
                       }
+                    case 4:
+                        ProductController productController = new ProductController();
+                        productController.run(customer);
                     case 0:
                         System.out.println("Avslutar kundhantering...");
                         return;
