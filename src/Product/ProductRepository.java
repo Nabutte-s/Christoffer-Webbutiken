@@ -120,6 +120,19 @@ public class ProductRepository {
                 }
     }
 
+    public void updateProductPrice(int id, double newprice) throws SQLException {
+        String sql = "UPDATE products SET price = ? WHERE product_id = ?";
+
+        try (Connection conn = DriverManager.getConnection(URL);
+             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+
+            pstmt.setDouble(1, newprice);
+            pstmt.setInt(2, id);
+
+            pstmt.executeUpdate();
+        }
+    }
+
 
 
 }

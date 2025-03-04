@@ -191,22 +191,4 @@ public class CustomerRepository {
         }
     }
 
-
-
-
-    /**
-     * Här kan fler metoder läggas till som t.ex:
-     * - addCustomer
-     * - getCustomerById
-     * - updateCustomer
-     * - deleteCustomer
-     * - findCustomerByEmail
-     *
-     * Varje metod kommer följa samma mönster:
-     * 1. Skapa Connection med DriverManager.getConnection(URL)
-     * 2. Skapa Statement eller PreparedStatement
-     * 3. Utför databasoperationen
-     * 4. Hantera resultatet
-     * 5. Låt try-with-resources stänga alla resurser
-     */
 }

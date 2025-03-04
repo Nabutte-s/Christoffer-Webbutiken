@@ -39,6 +39,7 @@ public class OrderService {
             System.out.println("ProduktID: " + order.getOrderItem().getProductId());
             System.out.println("Antal: " + order.getOrderItem().getQuantity());
             System.out.println("Pris per enhet: " + order.getOrderItem().getUnitPrice());
+            System.out.println("Totalpris: " + order.getOrderItem().getTotalPrice());
             System.out.println("-----------------");
         }
     }

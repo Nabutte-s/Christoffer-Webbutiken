@@ -12,16 +12,22 @@ public class OrderRepository {
     public Order buyProduct(Order order) {
         String sql = "INSERT INTO orders (customer_id) VALUES (?)";
         try (Connection conn = DriverManager.getConnection(URL);
-             PreparedStatement pstmt = conn.prepareStatement(sql)) {
+             PreparedStatement pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             pstmt.setInt(1, order.getCustomerId());
             System.out.println("Order added with ID: "+ order.getCustomerId());
             pstmt.executeUpdate();
-            String sql2 = "INSERT INTO orders_products (product_id, order_id, quantity, unit_price) VALUES (?, last_insert_rowid(), ?, ?)";
-            PreparedStatement pstmt2 = conn.prepareStatement(sql2);
-            pstmt2.setInt(1, order.getProductId());
-            pstmt2.setInt(2, order.getQuantity());
-            pstmt2.setInt(3, order.getUnitPrice());
+            ResultSet generatedKeys = pstmt.getGeneratedKeys();
+            if (generatedKeys.next()) {
+                int orderId = generatedKeys.getInt(1);
+                String sql2 = "INSERT INTO orders_products (product_id, order_id, quantity, unit_price) VALUES (?, ?, ?, ?)";
+                PreparedStatement pstmt2 = conn.prepareStatement(sql2);
+                pstmt2.setInt(1, order.getProductId());
+                pstmt2.setInt(2, orderId);
+                pstmt2.setInt(3, order.getQuantity());
+                pstmt2.setInt(4, order.getUnitPrice());
+                pstmt2.executeUpdate();
+            }
             System.out.println("Product added with ID: "+ order.getProductId());
             String sql3 = "UPDATE products SET stock_quantity = stock_quantity - ? WHERE product_id = ?;";
             PreparedStatement pstmt3 = conn.prepareStatement(sql3);

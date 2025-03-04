@@ -32,4 +32,8 @@ public class OrderItem {
     public int getUnitPrice() {
         return unitPrice;
     }
+
+    public double getTotalPrice() {
+        return quantity * unitPrice;
+    }
 }

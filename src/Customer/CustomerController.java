@@ -1,6 +1,7 @@
 package Customer;
 
 import Product.ProductController;
+import Valdating.*;
 
 import java.sql.SQLException;
 import java.util.Scanner;
@@ -38,9 +39,8 @@ public class CustomerController {
                 // Skriv ut menyalternativ direkt i run-metoden för tydlighet
                 System.out.println("\n=== Kundhantering ===");
                 System.out.println("1. Visa alla kunder");
-                System.out.println("2, Skapa ny kund");
-                System.out.println("3. Uppdatera konto");
-                System.out.println("4. Varor");
+                System.out.println("2. Uppdatera konto");
+                System.out.println("3. Varor");
                 System.out.println("0. Avsluta");
                 System.out.print("Välj ett alternativ: ");
 
@@ -54,22 +54,6 @@ public class CustomerController {
                         customerService.showAllUsers();
                         break;
                     case 2:
-                        // Anropa service-lagret för att skapa ny kund
-                        System.out.println("ange namn");
-                        String userName = scanner.next();
-                        System.out.println("ange email");
-                        String email = scanner.next();
-                        System.out.println("ange telefon");
-                        int phone = scanner.nextInt();
-                        System.out.println("ange address");
-                        String address = scanner.next();
-                        System.out.println("ange lösenord");
-                        String password = scanner.next();
-                        Customer customer1 = new Customer (userName, email, phone, address, password);
-                        customerService.addNewCustomer(customer);
-                        System.out.println("added " + customer);
-                        break;
-                    case 3:
                         System.out.println("\n=== Uppdatera konto ===");
                         System.out.println("1. Uppdatera namn");
                         System.out.println("2. Uppdatera email");
@@ -84,30 +68,36 @@ public class CustomerController {
                             //uppdatera namn
                             System.out.println("ange nytt namn");
                             String newName = scanner.next();
+                            if(!NameValidator.isValidName(newName)) throw new Exception("Namn är ogiltigt");
+
                             customerService.updateName(customer.getId(),newName);
                             break;
                         case 2:
                             //uppdatera email
                             System.out.println("ange ny email");
                             String newEmail = scanner.next();
+                            if(!EmailValidator.isValidEmail(newEmail)) throw new Exception("Email är ogiltig");
                             customerService.updateEmail(customer.getId(), newEmail);
                             break;
                         case 3:
                             //uppdatera telefon
                             System.out.println("ange ny telefon");
                             int newPhone = scanner.nextInt();
+                            if(!PhoneValidator.isValidPhone(newPhone)) throw new Exception("Telefonnummer är ogiltigt(Behöver 10 siffror)");
                             customerService.updatePhone(customer.getId(), newPhone);
                             break;
                         case 4:
                             //uppdatera address
                             System.out.println("ange ny address");
                             String newAddress = scanner.next();
+                            if(!AdressValidator.isValidAdress(newAddress)) throw new Exception("Adress är ogiltig");
                             customerService.updateAddress(customer.getId(),newAddress);
                             break;
                         case 5:
                             // uppdatera lösenord
                             System.out.println("ange nytt lösenord");
                             String newPassword = scanner.next();
+                            if(!PasswordValidator.isValidPassword(newPassword)) throw new Exception("Lösenord är ogiltigt");
                             customerService.updatePassword(customer.getId(), newPassword);
                             break;
                         case 0:
@@ -117,7 +107,7 @@ public class CustomerController {
                             System.out.println("Ogiltigt val, försök igen");
 
                       }
-                    case 4:
+                    case 3:
                         ProductController productController = new ProductController();
                         productController.run(customer);
                     case 0:

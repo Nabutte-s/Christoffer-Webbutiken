@@ -82,7 +82,7 @@ public class ProductService {
     public void findByCategory(String category) throws SQLException {
         ArrayList<Product> product = ProductRepository.findByCategory(category);
         if (product.isEmpty()) {
-            System.out.println("Inga kunder hittades.");
+            System.out.println("Inga produkter hittades.");
         }
         System.out.println("\n=== Productlista ===" );
         for (Product Product : product) {
@@ -95,8 +95,9 @@ public class ProductService {
         }
     }
 
-    /**
-     * Här kan man lägga till fler metoder som t.ex:
-     * - deleteProduct
-     */
+    public void updateProductPrice(int productId, double newPrice) throws SQLException {
+        System.out.println("Ny pris: " + newPrice);
+        ProductRepository.updateProductPrice(productId, newPrice);
+    }
+
 }
