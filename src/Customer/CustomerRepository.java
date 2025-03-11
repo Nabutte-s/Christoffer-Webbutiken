@@ -65,6 +65,7 @@ public class CustomerRepository {
         }
     }
 
+
     public Customer findById(int id) throws SQLException {
         String sql = "SELECT * FROM customers WHERE customer_id = ?";
 

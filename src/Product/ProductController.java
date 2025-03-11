@@ -17,6 +17,13 @@ public class ProductController {
         this.scanner = new Scanner(System.in);
     }
 
+    /**
+     * Huvudloop för produkthantering
+     * Visar meny och hanterar användarval
+     *
+     * @param customer den inloggade kunden
+     * @throws SQLException vid problem med databasanrop
+     */
     public void run(Customer customer) throws SQLException {
         while (true) {
             try {
@@ -101,8 +108,8 @@ public class ProductController {
             }
         catch (Exception e) {
             System.out.println(e.getMessage());
+            scanner.nextLine();
         }
     }
     }
-
 }

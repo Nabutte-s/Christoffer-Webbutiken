@@ -53,14 +53,5 @@ public class Product{
     public int getStock() {
         return stock;
     }
-/* public tostring() {
-        return "Product.product{" +
-                "Id=" + Id +
-                ", manufacturer='" + manufacturer + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", price=" + price +
-                ", stock=" + stock +
-                '}';
-    }*/
+
 }

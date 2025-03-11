@@ -10,16 +10,16 @@ public class LoginService {
     }
 
     public boolean loginAsCustomer(String email, String password) throws SQLException {
-        System.out.println("E-postadress: " + email);
-        System.out.println("Lösenord: " + password);
+        //System.out.println("E-postadress: " + email);
+        //System.out.println("Lösenord: " + password);
 
         Customer customer = customerRepository.findByEmail(email);
-        System.out.println("Kunddata: " + customer);
+        //System.out.println("Kunddata: " + customer);
 
         if (customer != null) {
-            System.out.println("Kunddata finns");
+            //System.out.println("Kunddata finns");
             if (customer.getPassword() != null) {
-                System.out.println("Lösenord finns");
+                //System.out.println("Lösenord finns");
                 if (customer.getPassword().equals(password)) {
                     System.out.println("Lösenord matchar");
                     return true;

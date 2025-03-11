@@ -1,5 +1,4 @@
 package Customer;
-import Super.User;
 /**
  * Klass som representerar en kund i webbshopen
  * Används för att hantera kunddata mellan databasen och applikationen
@@ -60,15 +59,4 @@ public class Customer{
         return password;
     }
 
-
-    public String toString() {
-        return "Customer.Customer{" +
-                "customerId=" + Id +
-                ", name='" + userName + '\'' +
-                ", email='" + email + '\'' +
-                ", phone='" + phone + '\'' +
-                ", address='" + address + '\'' +
-                ", password='" + getPassword() + '\'' +
-                '}';
-    }
 }

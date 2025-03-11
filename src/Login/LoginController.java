@@ -52,14 +52,16 @@ public class LoginController {
                         int phone = scanner.nextInt();
                         if(!PhoneValidator.isValidPhone(phone)) throw new IllegalArgumentException("Invalid phone number: " + phone);
                         System.out.println("ange address");
-                        String address = scanner.next();
+                        scanner.nextLine();
+                        String address = scanner.nextLine();
                         if(!AdressValidator.isValidAdress(address)) throw new IllegalArgumentException("Invalid address: " + address);
                         System.out.println("ange lösenord");
                         String password2 = scanner.next();
                         if (!PasswordValidator.isValidPassword(password2)) throw new IllegalArgumentException("Invalid password: " + password2);
                         Customer customer1 = new Customer (userName, email2, phone, address, password2);
                         customerService.addNewCustomer(customer1);
-                        System.out.println("added " + customer1);
+                        scanner.nextLine();
+                        System.out.println("added " + customer1.getUserName() + " to database");
                         break;
                     case "0":
                         System.out.println("Avslutar logga in...");
